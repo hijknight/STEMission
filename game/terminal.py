@@ -59,6 +59,7 @@ ls                List files
 pwd               Show current directory
 cd <directory>    Change directory
 view <file>        Read a file
+print <file>      Print a specified file (very helpful)
 clear             Clear the terminal
 logout            Log out
 """)
@@ -97,6 +98,7 @@ logout            Log out
             return
 
         file_path = self.filesystem.get_real_file_path(argument)
+        print(file_path)
 
         if file_path is None:
             print(f"File not found: {argument}")
