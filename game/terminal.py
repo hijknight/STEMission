@@ -1,3 +1,5 @@
+from game.printer import print_file
+
 class Terminal:
     def __init__(self, filesystem):
         self.filesystem = filesystem
@@ -93,5 +95,23 @@ logout            Log out
         if not argument:
             print("Usage: print <filename>")
             return
-        # self.print.doc(argument)
-        print(f"Printing {argument}...")
+
+        file_path = self.filesystem.get_real_file_path(argument)
+
+        if file_path is None:
+            print(f"File not found: {argument}")
+            return
+
+        print()
+        print("CENTRAL PRINT SERVICE")
+        print("---------------------")
+        print(f"Document: {argument}")
+        print("Submitting print job...")
+
+
+        if print_file(file_path):
+            print("PRINT JOB ACCEPTED")
+        else:
+            print("PRINT JOB FAILED")
+
+        print()

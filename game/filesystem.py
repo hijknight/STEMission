@@ -115,3 +115,19 @@ class FakeFileSystem:
     def reset(self):
         self.current_path = []
 
+    def get_real_file_path(self, filename):
+        current_real_path = self.root_path
+
+        for folder in self.current_path:
+            current_real_path /= folder
+
+        file_path = current_real_path / filename
+
+        if not file_path.exists():
+            return None
+
+        if not file_path.is_file():
+            return None
+
+        return file_path
+
