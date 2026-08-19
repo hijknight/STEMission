@@ -1,5 +1,5 @@
 CORRECT_PASSWORD = "luminexus"
-from game.display import login_success
+
 def login():
     attempts = 0
     while True:

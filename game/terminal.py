@@ -2,6 +2,7 @@ class Terminal:
     def __init__(self, filesystem):
         self.filesystem = filesystem
         self.running = True
+        #self.print = print
 
         self.commands = {
             "help": self.command_help,
@@ -11,6 +12,7 @@ class Terminal:
             "view": self.command_view,
             "clear": self.command_clear,
             "logout": self.command_logout,
+            "print": self.command_print,
         }
 
     def run(self, username):
@@ -85,3 +87,11 @@ logout            Log out
 
         print("\033[2J\033[H", end="")
         self.running = False
+
+    def command_print(self, argument):
+
+        if not argument:
+            print("Usage: print <filename>")
+            return
+        # self.print.doc(argument)
+        print(f"Printing {argument}...")

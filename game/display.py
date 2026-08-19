@@ -25,12 +25,12 @@ Type 'help' to display available commands.
 
 ==============================================
 """)
-    elif username == "alickatheadmin2005":
+    elif username == "admin":
         print("""
 ==============================================
           CONNECTION ESTABLISHED
             =================          
-         WELCOME BACK, MS. ADAMATOVA
+         WELCOME BACK, ADMIN
 ==============================================
 
 Type 'help' to display available commands.
