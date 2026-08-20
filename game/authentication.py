@@ -1,6 +1,6 @@
 from game.display import username_success
 
-CORRECT_PASSWORDS = ["cells4l", "battery", "bridgesarecool"]
+CORRECT_PASSWORDS = ["cells", "battery", "bridgesarecool"]
 POSSIBLE_USERNAMES = ["ecarter1997", "admin"]
 def login():
     attempts = 0
@@ -9,6 +9,9 @@ def login():
 
         if username in POSSIBLE_USERNAMES:
             username_success(username.lower())
+        else:
+            print("USERNAME NOT FOUND")
+            continue
 
         print("Please input your password...")
         print()

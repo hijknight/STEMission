@@ -25,7 +25,7 @@ def main():
 
         login_success()
 
-        if password.lower() == "cells4l":
+        if password.lower() == "cells":
             filesystem = FakeFileSystem(science_files)
         elif password.lower() == "bridgesarecool":
             filesystem = FakeFileSystem(bridge_files)

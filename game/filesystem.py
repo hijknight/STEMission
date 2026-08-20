@@ -35,9 +35,19 @@ class FakeFileSystem:
                     continue
 
                 try:
-                    filesystem[item.name] = item.read_text(
-                        encoding="utf-8",
+                    fake_name, locked, password = self._parse_filename(
+                        item.name
                     )
+
+                    filesystem[fake_name] = {
+                        "__file__": True,
+                        "content": item.read_text(
+                            encoding="utf-8",
+                        ),
+                        "locked": locked,
+                        "password": password,
+                        "real_path": item,
+                    }
 
                 except UnicodeDecodeError:
                     raise ValueError(
@@ -65,11 +75,15 @@ class FakeFileSystem:
 
         for name, item in directory.items():
 
-            if isinstance(item, dict):
+            if self._is_directory(item):
                 print(f"[FOLDER] {name}")
 
-            else:
-                print(f"[FILE] {name}")
+            elif self._is_file(item):
+
+                if item["locked"]:
+                    print(f"[LOCKED] {name}")
+                else:
+                    print(f"[FILE]   {name}")
 
     def cd(self, location):
         location = location.strip()
@@ -90,7 +104,7 @@ class FakeFileSystem:
             print(f"Directory not found: {location}")
             return
 
-        if not isinstance(directory[location], dict):
+        if not self._is_directory(directory[location]):
             print(f"{location} is not a directory")
             return
 
@@ -104,30 +118,115 @@ class FakeFileSystem:
             return
 
         item = directory[filename]
-        if isinstance(item, dict):
+
+        if self._is_directory(item):
             print(f"{filename} is a directory")
             return
 
+        if item["locked"]:
+            print()
+            print("ACCESS DENIED")
+            print("This file is password protected.")
+            print(f"Use: unlock {filename}")
+            print()
+            return
+
         print()
-        print(item.strip())
+        print(item["content"].strip())
         print()
 
     def reset(self):
         self.current_path = []
 
     def get_real_file_path(self, filename):
-        current_real_path = self.root_path
+        directory = self.get_current_directory()
 
-        for folder in self.current_path:
-            current_real_path /= folder
-
-        file_path = current_real_path / filename
-
-        if not file_path.exists():
+        if filename not in directory:
             return None
 
-        if not file_path.is_file():
+        item = directory[filename]
+
+        if not self._is_file(item):
             return None
 
-        return file_path
+        if item["locked"]:
+            return None
+
+        return item["real_path"]
+
+    def _is_file(self, item):
+        return (
+                isinstance(item, dict)
+                and item.get("__file__") is True
+        )
+
+
+    def _is_directory(self, item):
+        return (
+                isinstance(item, dict)
+                and not self._is_file(item)
+        )
+
+    def _parse_filename(self, filename):
+        """
+        Convert a real filename into the fake filename
+        and determine whether it is password protected.
+
+        Example:
+            protocol_V5.lock-4821.txt
+
+        becomes:
+            protocol_V5.txt
+            locked = True
+            password = 4821
+        """
+
+        if ".lock-" not in filename:
+            return filename, False, None
+
+        name_before_lock, lock_data = filename.split(".lock-", 1)
+
+        if "." not in lock_data:
+            raise ValueError(
+                f"Invalid locked filename: {filename}"
+            )
+
+        password, extension = lock_data.split(".", 1)
+
+        fake_filename = f"{name_before_lock}.{extension}"
+
+        return fake_filename, True, password
+
+    def unlock(self, filename, password):
+        directory = self.get_current_directory()
+
+        if filename not in directory:
+            print(f"File not found: {filename}")
+            return False
+
+        item = directory[filename]
+
+        if self._is_directory(item):
+            print(f"{filename} is a directory")
+            return False
+
+        if not item["locked"]:
+            print(f"{filename} is already unlocked.")
+            return True
+
+        if password != item["password"]:
+            print()
+            print("ACCESS DENIED")
+            print("Incorrect password.")
+            print()
+            return False
+
+        item["locked"] = False
+
+        print()
+        print("ACCESS GRANTED")
+        print(f"{filename} unlocked.")
+        print()
+
+        return True
 

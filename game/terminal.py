@@ -15,6 +15,7 @@ class Terminal:
             "clear": self.command_clear,
             "logout": self.command_logout,
             "print": self.command_print,
+            "unlock":self.command_unlock,
         }
 
     def run(self, username):
@@ -59,6 +60,7 @@ ls                List files
 pwd               Show current directory
 cd <directory>    Change directory
 view <file>       Read a file
+unlock <file>     Unlock a protected file
 print <file>      Print a specified file (very helpful)
 clear             Clear the terminal
 logout            Log out
@@ -117,3 +119,15 @@ logout            Log out
             print("PRINT JOB FAILED")
 
         print()
+
+    def command_unlock(self, argument):
+        if not argument:
+            print("Usage: unlock <filename>")
+            return
+
+        password = input("PASSWORD: ").strip()
+
+        self.filesystem.unlock(
+            argument,
+            password
+        )
