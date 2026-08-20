@@ -9,11 +9,9 @@ def main():
 
     project_root = Path(__file__).parent
 
-    science_files = project_root / "science_files" # cells4L password
-    bridge_files = project_root / "bridge_files"
-    battery_files = project_root / "battery_files"
-
-
+    science_files = project_root / "science_files" # cell
+    engineering_files = project_root / "engineering_files" # bridge
+    technology_files = project_root / "technology_files" # battery
 
     while True:
         opening()
@@ -25,17 +23,16 @@ def main():
 
         login_success()
 
-        if password.lower() == "cells":
+        if password.lower() == "cell":
             filesystem = FakeFileSystem(science_files)
-        elif password.lower() == "bridgesarecool":
-            filesystem = FakeFileSystem(bridge_files)
+        elif password.lower() == "bridge":
+            filesystem = FakeFileSystem(engineering_files)
         else:
-            filesystem = FakeFileSystem(battery_files)
+            filesystem = FakeFileSystem(technology_files)
 
         terminal = Terminal(filesystem)
 
         terminal.run(username)
-
 
 if __name__ == '__main__':
     main()

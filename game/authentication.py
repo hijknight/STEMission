@@ -1,6 +1,6 @@
 from game.display import username_success
 
-CORRECT_PASSWORDS = ["cells", "battery", "bridgesarecool"]
+CORRECT_PASSWORDS = ["cell", "battery", "bridge"]
 POSSIBLE_USERNAMES = ["ecarter1997", "admin"]
 def login():
     attempts = 0
@@ -16,8 +16,6 @@ def login():
         print("Please input your password...")
         print()
         password = input("PASSWORD: ").strip()
-
-
 
         if password.lower() in CORRECT_PASSWORDS:
             print()
