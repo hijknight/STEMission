@@ -1,0 +1,121 @@
+================================================================================
+LABORATORY NOTEBOOK — DR. EVELYN CARTER
+SUBTERRANEAN LABORATORY, SECTOR 7 — "PROJECT V"
+NOTEBOOK VOL. III — PROTOCOLS & OPERATIONAL RECORDS
+CLASSIFICATION: PERSONAL
+================================================================================
+
+PROTOCOL V-03 — EXPRESSION AND VALIDATION OF VOLW ELECTRON-HARVESTING CONDUIT
+Target: VolW nanowire-type conduit, outer membrane spanning
+Version: 2.3
+Last revised: cycle 35, day 3
+
+================================================================================
+
+PURPOSE
+-------
+Express the VolW outer-membrane conduit protein and confirm electron transfer
+from extracellular mineral substrate (magnetite, Fe₃O₄) to the intracellular
+metabolic network via indirect readout through the volC reductase system.
+
+EQUIPMENT ADDITIONS OVER V-01/V-02
+-----------------------------------
+- Anaerobic chamber or Hungate tube setup — THIS IS NOT OPTIONAL. VolW
+  function requires anaerobic or microaerobic conditions. In the presence of
+  >1% O₂, the electron transfer pathway short-circuits to water oxidation
+  instead of Fe reduction, and you will see nothing and conclude your conduit
+  doesn't work, and it does; you just ran it in the wrong atmosphere.
+- Gas mix for anaerobic work: 80% N₂, 10% CO₂, 10% H₂ (pre-mixed cylinder,
+  label says "VOLTIBACTER GROWTH MIX — DO NOT USE FOR WELDING, BENEDIKT")
+- Mineral substrate: magnetite (Fe₃O₄) nanoparticles, 30-50 nm particle size,
+  stored as 50 mg/mL slurry in anaerobic phosphate buffer (50 mM, pH 6.8)
+  — use 6.8, NOT 7.4. Above pH 7.0, magnetite surface chemistry changes and
+  VolW cannot dock to it. Confirmed across 14 independent experiments.
+- Ferrozine assay reagents (for Fe²⁺ quantification — see Step 4):
+  Ferrozine: 3-(2-pyridyl)-5,6-diphenyl-1,2,4-triazine-4',4''-disulfonic acid
+  10 mM stock in 50 mM HEPES pH 7.0, store at 4°C protected from light
+  Ferrozine:Fe²⁺ complex absorbs at 562 nm (ε = 27,900 M⁻¹cm⁻¹)
+
+PROCEDURE
+---------
+
+Step 1 — Clone and express VolW (Day 1-4)
+
+VolW contains an N-terminal signal peptide (first 22 residues) that directs
+it to the outer membrane. Do NOT remove or alter this peptide during cloning.
+In version 1.0, I cloned from residue 23 onwards because I thought the signal
+peptide was just a tag. The protein expressed perfectly, stayed in the
+cytoplasm, and did nothing useful.
+
+Clone volW into pVB-CHL01 (or the construct from V-02 if already using that
+vector — use a third distinct origin of replication in that case; suggest pBBR1
+origin as the third; pBBR1-KAN03 is in the freezer box labeled "THIRD VECTORS"). Use the constitutive promoter P_const-M for expression.
+
+After transformation and verification (same workflow as V-01 Steps 5-6):
+Grow to mid-log OD₆₀₀ 0.5 in LB + appropriate antibiotics.
+Shift to anaerobic conditions (transfer to pre-sparged anaerobic medium in
+Hungate tubes or move to the anaerobic chamber — close the airlock fully,
+the partial seal does not count as anaerobic; I have data).
+Let adapt 30 min before proceeding.
+
+Step 2 — Prepare mineral substrate (Day 4, prepare in advance)
+
+In the anaerobic chamber: add magnetite slurry to final concentration 1 mg/mL
+in the anaerobic M9 medium (pre-sparged, 80/10/10 gas mix, 30°C).
+Magnetic stir bar ensures suspension — slow stir, 100 rpm, do not shear the
+nanoparticle aggregates or the surface area you need for VolW docking drops.
+
+Step 3 — Electron transfer assay (Day 4-5)
+
+Inoculate 5 mL anaerobic M9 + magnetite with 200 µL mid-log VolW-expressing
+culture. Seal Hungate tube with crimp cap. Incubate at 30°C, static (no shaking
+— you need cell-mineral contact; agitation prevents it.)
+
+Sample 200 µL from the liquid phase at 0, 2, 4, 8, 12, 24 hr using a syringe
+through the crimp cap (pre-flush syringe with the anaerobic gas mix first —
+every time you sample without flushing the syringe you add a tiny air bubble
+and by hour 12 it adds up to enough O₂ to ruin the late timepoints).
+
+Step 4 — Fe²⁺ quantification by Ferrozine assay
+
+To each 200 µL sample, add 20 µL of 0.5 M HCl (to dissolve any Fe²⁺ that
+precipitated) and 20 µL ferrozine reagent (10 mM stock).
+Vortex, incubate 10 min, room temp.
+Read absorbance at 562 nm versus a blank (same medium, no cells, no mineral).
+
+Fe²⁺ standard curve: prepare from 0, 10, 25, 50, 100, 200, 500 µM FeCl₂
+in the same HCl/ferrozine mix. Fresh FeCl₂ standards every assay — FeCl₂
+oxidizes to FeCl₃ at room temp in air. Make them in the anaerobic chamber
+and run them the same day.
+
+Increasing Fe²⁺ over time = VolW is harvesting electrons and reducing mineral
+Fe³⁺ to Fe²⁺. Flat line = no conduit activity (check expression by western
+blot for VolW outer membrane localization before panicking).
+
+Expected: by 24 hr, a VolW-expressing strain should reduce 0.8-1.2 µmol Fe²⁺
+per mg total protein per hour under these conditions (based on the Geobacter
+benchmarks used to design VolW — actual numbers will vary until empirically
+calibrated for VB-Δsid background).
+
+Step 5 — Outer membrane localization control
+
+After the 24 hr timepoint, remove remaining culture. Spin down cells
+(5,000 × g, 10 min, 4°C). Re-suspend in lysis buffer (50 mM Tris pH 7.5,
+150 mM NaCl, 0.1 mM PMSF — add PMSF fresh from 100 mM stock in isopropanol).
+Sonicate 3× 15 sec bursts, 30% amplitude, on ice between bursts. 
+
+Differential centrifugation to separate membrane fractions:
+  1,000 × g, 10 min — pellet unlysed cells and debris (discard pellet)
+  10,000 × g, 20 min — pellet inner membrane fragments and inclusion bodies
+  100,000 × g, 60 min (ultracentrifuge, book it in advance) — pellet outer
+    membrane vesicles
+
+VolW should be enriched in the 100,000 × g pellet (outer membrane fraction).
+Run on SDS-PAGE, expected size ~47 kDa. Transfer to nitrocellulose, probe with
+anti-His antibody if using His-tagged volW construct (tag goes on C-terminus
+only — N-terminal tag blocks signal peptide function, see version 1.0 notes).
+
+If VolW is in the 10,000 × g pellet instead: it's in inclusion bodies (misfolded
+aggregates). This means it was expressed too fast. Reduce inducer concentration
+or switch to a weaker promoter. Or reduce temperature to 18°C for expression.
+Cold and slow is better than hot and wrong.

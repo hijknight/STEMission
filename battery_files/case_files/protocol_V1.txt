@@ -1,0 +1,212 @@
+================================================================================
+LABORATORY NOTEBOOK — DR. EVELYN CARTER
+SUBTERRANEAN LABORATORY, SECTOR 7 — "PROJECT V"
+NOTEBOOK VOL. III — PROTOCOLS & OPERATIONAL RECORDS
+CLASSIFICATION: PERSONAL
+================================================================================
+
+PROTOCOL V-01 — ASSEMBLY AND TRANSFORMATION OF THE SCAVENGER OPERON
+Target: volA / volB / volC under promoter P_scav
+Version: 7.2
+Last revised: cycle 34, day 9
+
+================================================================================
+
+PURPOSE
+-------
+Assemble the three-gene iron-uptake relay (outer membrane porin volA, ABC
+transporter volB, ferric reductase volC) as a single operon under the iron-
+responsive promoter P_scav, clone into a kanamycin-resistant vector, and
+transform into the Voltibacter chassis strain VB-Δsid (siderophore-null
+background, ensures any iron uptake we see is actually ours).
+
+EQUIPMENT
+---------
+- Thermal cycler
+- Gel electrophoresis rig, 1% agarose, TAE buffer
+- Microcentrifuge
+- 42°C water bath (CALIBRATED — use the thermometer taped to the side,
+  not the dial)
+- Spectrophotometer
+- Incubator shaker, 37°C, 200 rpm
+- Electroporator OR chemical transformation setup — see Step 7 note
+
+REAGENTS & AMOUNTS
+------------------
+Synthetic gene blocks (ordered from synthesis supplier, double-stranded,
+codon-optimized for VB-Δsid GC content of 62%):
+  - volA fragment: 2.3 kb, delivered lyophilized, resuspend in 50 µL nuclease-
+    free H₂O to 100 ng/µL, store at -20°C in 5 µL aliquots
+  - volB fragment: 3.1 kb, same resuspension, 100 ng/µL
+  - volC fragment: 1.7 kb, same resuspension, 100 ng/µL
+  - P_scav promoter cassette: 420 bp, 50 ng/µL
+
+Cloning vector: pVB-KAN02 (pUC origin, KanR, multiple cloning site with XbaI /
+  SpeI / EcoRI / HindIII sites in that order — NOTE: XbaI and SpeI generate
+  compatible overhangs. Do NOT use both in the same ligation.)
+
+Restriction enzymes and 10× buffers (all NEB or equivalent, stored at -20°C):
+  - XbaI: 20 U/µL — 1 µL per digest reaction
+  - EcoRI-HF: 20 U/µL — 1 µL per digest reaction
+  - HindIII-HF: 20 U/µL — 1 µL per digest reaction
+  - CutSmart Buffer 10×: 5 µL per 50 µL reaction
+
+T4 DNA Ligase: 400 U/µL — 1 µL per reaction
+T4 Ligase Buffer 10× (contains ATP): 2 µL per 20 µL reaction
+  !! IMPORTANT: Thaw on ice. The ATP in this buffer degrades at room temp.
+  If you left it on the bench again, make fresh. ATP kits are in drawer 4B. !!
+
+Gibson Assembly Master Mix (NEB #E2611): 10 µL per 20 µL reaction, thaw on ice
+  (Used for upstream operon junction assembly — see Step 3)
+
+LB broth: 10 g/L tryptone, 5 g/L yeast extract, 10 g/L NaCl, pH 7.0
+LB agar plates + 50 µg/mL kanamycin (NOT 100 µg/mL — VB-Δsid is sensitive
+  at higher concentrations, kills your transformants, adds 48 hrs to your week)
+
+SOC recovery medium: 20 g/L tryptone, 5 g/L yeast extract, 0.5 g/L NaCl,
+  2.5 mM KCl, 10 mM MgCl₂, 20 mM glucose — autoclave, add MgCl₂ and glucose
+  after cooling, filter-sterilize
+
+Iron-chelated minimal medium (for functional screening post-transformation):
+  M9 salts base (6 g/L Na₂HPO₄, 3 g/L KH₂PO₄, 0.5 g/L NaCl, 1 g/L NH₄Cl),
+  supplemented with 0.2% glucose, 2 mM MgSO₄, 0.1 mM CaCl₂, and 100 µM
+  2,2'-dipyridyl as an iron chelator — this creates the Fe³⁺-limiting condition
+  that should turn P_scav on. Make fresh. 2,2'-dipyridyl is light-sensitive,
+  foil-wrap the flask, or your results will be trash and you will be sad.
+
+Competent cells: VB-Δsid chemically competent stock, -80°C. 50 µL aliquots.
+  Thaw on ice for 10- 15 min. They are NOT electrocompetent — the outer membrane
+  composition of the VB chassis cannot tolerate the pulse. Replacing the electroporator 
+  cuvette holder is apparently not covered under warranty.
+
+PROCEDURE
+---------
+
+Step 1 — Fragment verification (Day 1, ~2 hrs)
+Thaw one aliquot each of volA, volB, volC, P_scav. Run 1 µL of each on a
+1% agarose gel (TAE, 100V, 35 min) alongside a 1 kb+ ladder. Confirm band
+sizes before touching anything else. 
+
+Expected sizes: volA ~2.3 kb, volB ~3.1 kb, volC ~1.7 kb, P_scav ~420 bp.
+
+Step 2 — Restriction digest of fragments and vector (Day 1, ~2 hrs + overnight)
+
+For each fragment (volA, volB, volC) in individual 0.2 mL PCR tubes:
+  - 5 µL fragment DNA (~100 ng total)
+  - 5 µL CutSmart 10× buffer
+  - 1 µL XbaI
+  - 1 µL EcoRI-HF
+  - 38 µL nuclease-free H₂O
+  Total: 50 µL per reaction
+
+Incubate at 37°C, 2 hours. Heat-inactivate at 80°C for 20 minutes.
+
+For vector pVB-KAN02 linearization:
+  - 10 µL vector miniprep (~500 ng total)
+  - 5 µL CutSmart 10×
+  - 1 µL XbaI
+  - 1 µL EcoRI-HF
+  - 33 µL nuclease-free H₂O
+  Total: 50 µL
+
+Incubate at 37°C for 2 hours. Gel-purify the linearized vector band (cut out the
+~4.2 kb band, avoid the small stuffer fragment above it). Use a gel extraction
+kit per manufacturer protocol. Elute in 30 µL nuclease-free H₂O.
+
+Nanodrop all purified digests. You want ≥15 ng/µL for fragments, ≥20 ng/µL
+for vector. Below that: re-run the digest with fresh enzyme or reorder DNA.
+
+Step 3 — Operon junction assembly via Gibson (Day 2, ~1 hr + overnight gel)
+
+The three fragments need to be stitched in order: P_scav — volA — volB — volC.
+Gibson assembly requires 15-30 bp overlaps between adjacent fragments. These
+overlaps were designed into the synthesis order — verify by checking the
+synthesis report (should be in folder V-01/synth_reports on the drive).
+
+Gibson reaction:
+  - 10 µL Gibson Assembly Master Mix (thawed on ice)
+  - P_scav: 0.05 pmol (~1.5 ng of the 420 bp fragment — TINY amount, use
+    a 1:10 dilution of your stock)
+  - volA: 0.05 pmol (~3.5 ng)
+  - volB: 0.05 pmol (~4.7 ng) 
+  - volC: 0.05 pmol (~2.5 ng)
+  - Nuclease-free H₂O to 20 µL total
+
+50°C for exactly 60 minutes in the thermal cycler (lid temp 55°C).
+Hold at 4°C after. DO NOT leave at 50°C longer — the exonuclease in the mix
+will start chewing into your assembled product. Sixty minutes. Set a timer.
+
+After assembly: run 2 µL on a gel to check for product at ~7.5 kb (P_scav +
+all three genes assembled). A faint band is fine — Gibson products are not
+abundant. If you see nothing, your overlaps are wrong, or the master mix is old.
+
+Step 4 — Ligation into vector (Day 2, ~15 min setup, overnight incubation)
+
+Ligation reaction (20 µL total):
+  - 2 µL T4 Ligase Buffer 10× (thawed on ice, vortexed gently, spin down)
+  - 1 µL T4 DNA Ligase (400 U/µL)
+  - Vector (gel-purified, linearized): 50 ng (~3 µL of your gel extraction)
+  - Gibson product (insert): molar ratio 3:1 insert: vector — for a ~7.5 kb
+    insert and ~4.2 kb vector, this works out to ~100 ng insert. Use 5 µL of
+    the Gibson reaction directly (don't purify between steps, the buffer is
+    compatible).
+  - Nuclease-free H₂O to 20 µL
+
+Incubate at 16°C overnight (12-16 hrs). The water bath with the floating foam
+rack works for this — NOT the 37°C incubator that's set to 16°C. That one runs
+warm and will inactivate the ligase by morning. I put a red dot on the
+correct one after version 4.0.
+
+Step 5 — Transformation (Day 3, ~3 hrs)
+
+Remove competent cells from -80°C. Thaw on ice — 10 minutes minimum, 20 max.
+They are CHEMICAL competent. Do not put them near the electroporator.
+
+Add 5 µL of ligation reaction directly to the 50 µL cell aliquot.
+Flick gently to mix. Do NOT pipette up and down — shear forces kill them.
+Incubate on ice: 30 minutes.
+
+Heat shock: 42°C water bath, exactly 90 seconds. Transfer IMMEDIATELY back
+to ice. Immediately means now. Not when you finish your coffee.
+
+Add 450 µL room-temp SOC medium. Incubate at 37°C, 200 rpm, 1 hour recovery.
+
+Plate 100 µL and 200 µL volumes on pre-warmed LB+Kan (50 µg/mL) agar plates.
+Incubate inverted at 37°C overnight (14-16 hrs).
+
+Step 6 — Colony screening and verification (Day 4)
+
+Pick 8-12 colonies per plate (white tip, gentle drag — these cells are fragile
+post-transformation, do not stab the agar like you're angry at it).
+Inoculate into 5 mL LB+Kan in 15 mL tubes. Grow at 37°C, 200 rpm, overnight.
+
+Miniprep using standard spin-column kit. Elute in 50 µL nuclease-free H₂O.
+Nanodrop: expect 50-200 ng/µL for a healthy miniprep from this strain.
+
+VERIFY BY DIAGNOSTIC DIGEST:
+  Single digest with EcoRI-HF on 500 ng miniprep DNA.
+  Expected bands: ~4.2 kb (vector) + ~7.5 kb (insert) if construct is correct.
+  Any other pattern = wrong. Re-pick colonies.
+
+Send 3-4 confirmed candidates for Sanger sequencing with primers P_scav-F and
+volC-R (sequences in the primer database, folder V-primers, blue binder).
+Confirm full operon sequence integrity before moving to Step 7.
+
+Step 7 — Functional screening (Day 5-6)
+
+Transform confirmed construct into the VB-Δsid working strain (separate
+transformation from the cloning strain — use the VB-Δsid chemically competent
+stock labeled "WORKING" in the -80°C freezer, not the "MASTER" stock).
+
+Plate on M9-dipyridyl selective medium (iron-chelated, see reagents).
+Wild-type VB-Δsid cannot grow under iron limitation without external
+siderophores — rescue of growth on these plates confirms the scavenger
+operon is functional.
+
+Incubate at 30°C (NOT 37°C for this strain — VB-Δsid is adapted to subterranean
+thermal conditions; the outer membrane starts losing integrity above 33°C).
+Growth should appear at 48-72 hrs.
+
+Iron-starved colonies should appear slightly amber under white light (Fe²⁺
+accumulation in cytoplasm). Under UV: nothing yet — bioluminescence requires
+the overflow valve construct from Protocol V-04.

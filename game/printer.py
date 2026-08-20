@@ -13,6 +13,7 @@ def print_file(file_path):
             ["lp", str(file_path)],
             check=True,
         )
+        return True
     except subprocess.CalledProcessError:
         print(f"PRINT ERROR: Unable to submit print job.")
         return False

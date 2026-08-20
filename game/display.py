@@ -2,7 +2,7 @@ def opening():
     print("""
 ╔══════════════════════════════════════════════╗
 ║                                              ║
-║             SUBTERRANEAN LABS                ║
+║         SUBTERRANEAN LABORATORIES            ║
 ║                                              ║
 ║                 MAINFRAME                    ║
 ║                                              ║
@@ -11,36 +11,18 @@ def opening():
 ╚══════════════════════════════════════════════╝
 """)
 
-
-def login_success(username):
+def username_success(username):
     if username == "ecarter1997":
-        print("""
-==============================================
-          CONNECTION ESTABLISHED
-            =================          
-         WELCOME BACK, DR. CARTER
-==============================================
-
-Type 'help' to display available commands.
-
-==============================================
-""")
+        print("WELCOME BACK, DR. CARTER")
     elif username == "admin":
-        print("""
+        print("WELCOME BACK, ADMIN")
+
+
+def login_success():
+    print("""
 ==============================================
-          CONNECTION ESTABLISHED
+    CONNECTION TO MAINFRAME ESTABLISHED
             =================          
-         WELCOME BACK, ADMIN
-==============================================
-
 Type 'help' to display available commands.
-
 ==============================================
-""")
-    else:
-        print("""
-==============================================
-          CONNECTION REJECTED         
-==============================================
-            UNKNOWN USER
 """)

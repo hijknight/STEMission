@@ -1,0 +1,110 @@
+================================================================================
+LABORATORY NOTEBOOK — DR. EVELYN CARTER
+SUBTERRANEAN LABORATORY, SECTOR 7 — "PROJECT V"
+NOTEBOOK VOL. III — PROTOCOLS & OPERATIONAL RECORDS
+CLASSIFICATION: PERSONAL
+================================================================================
+
+PROTOCOL V-04 — BIOLUMINESCENCE OVERFLOW VALVE: CLONING AND CALIBRATION
+Target: luciferase-family enzyme wired to ETC overflow
+Version: 3.0
+Last revised: cycle 35, day 14
+
+================================================================================
+
+PURPOSE
+-------
+Wire a bacterial luciferase-family enzyme to the electron-transport chain
+overflow node so that excess reducing power is harmlessly dissipated as photon
+emission rather than damaging the cell via oxidative stress. The glow is a
+SAFETY VALVE, not a signaling molecule. Important for accuracy and
+important for not electrocuting your chassis from the inside.
+
+ADDITIONAL REAGENTS
+-------------------
+Luciferase gene module: luxAB-V (a version of bacterial luciferase with
+  modified substrate affinity tuned for the intracellular redox state of VB —
+  see synthesis notes V-04-synth for modification rationale)
+Substrate for in vitro validation (Step 3 only):
+  Decanal (n-decyl aldehyde): light-sensitive, volatile, stored at 4°C sealed,
+  DO NOT store near the cold room door; the temperature cycling causes the
+  cap to loosen. Use 10 µL of neat decanal added to 1 mL buffer = ~60 mM stock.
+  Working concentration for assay: 100 µM final in reaction.
+  SEPARATELY: FMNH₂ (reduced riboflavin mononucleotide): 1 mM stock in 100 mM
+  phosphate buffer pH 7.0 with 1 mM DTT. Prepare fresh daily. FMNH₂ oxidizes
+  rapidly in air — make it in the anaerobic box, transfer in a sealed tube.
+  Working concentration: 250 µM in the reaction.
+
+Luminometer or plate reader with luminescence detection mode
+  (integration time 1 second minimum, 10 seconds preferred for dim signals)
+
+PROCEDURE
+---------
+
+Step 1 — Clone luxAB-V under overflow-responsive promoter (Day 1-4)
+
+The overflow promoter P_overflow is a synthetic construct that responds to
+elevated quinol: quinone ratio in the inner membrane — when the ETC is saturated
+(too many electrons, nowhere to send them), the quinol pool backs up, and this
+activates P_overflow. This promoter was characterized in V-04 preliminary work
+(cycle 33 notebook). Clone as: P_overflow — luxA — luxB in that order. luxA
+and luxB must be co-expressed and in the correct stoichiometry — LuxA: LuxB
+must form an αβ heterodimer. If you express them separately on different
+vectors at different copy numbers, the ratio goes wrong.
+
+Proceed with standard cloning (V-01 Steps 1-4) into pVB-CHL01 or pBBR1-KAN03
+depending on which vectors are already in use. Remember distinct origins.
+
+Step 2 — Transform and select (Day 4-5)
+As V-01, Step 5. Plate on appropriate antibiotics. Verify insert by sequencing.
+
+Step 3 — In vitro luminescence validation (Day 6)
+
+Before testing in living cells, confirm LuxAB-V enzyme activity in cell extract.
+Grow confirmed construct to OD₆₀₀ 0.8 in LB + antibiotic. Chill on ice.
+Pellet cells (4,000 × g, 10 min, 4°C). Wash once with cold PBS.
+Resuspend in 500 µL lysis buffer (V-03 Step 5 recipe). Sonicate as before.
+Clarify at 16,000 × g, 15 min, 4°C. Transfer supernatant (crude lysate).
+Protein concentration by Bradford assay: aim for 1-2 mg/mL.
+
+Luciferase assay (perform in the DARK or subdued amber light):
+In a 1.5 mL Eppendorf:
+  - 200 µL crude lysate
+  - 50 µL 1 mM FMNH₂ stock (250 µM final)
+  - 10 µL 60 mM decanal stock in DMSO (allow 5 min pre-equilibration in DMSO
+    before adding to aqueous — it will cloud the solution briefly; that is
+    normal; it clears as the aldehyde disperses)
+  - Phosphate buffer to 400 µL total
+
+Add decanal LAST. Start the luminometer immediately after mixing.
+Peak emission is at ~490 nm, blue-green. The reaction is fast — you have
+about 60-90 seconds of strong signal before it drops. Do not pipette during
+measurement.
+
+Positive control: use a strain expressing wild-type luxAB (non-modified) as
+  signal reference.
+Negative control: lysate from cells carrying empty vector — any signal here
+  is contamination or equipment noise.
+
+Normalized output: relative light units (RLU) per mg protein.
+A functional LuxAB-V preparation should give ≥10,000 RLU/mg in this assay.
+
+Step 4 — In vivo calibration of overflow threshold (Day 7-14)
+
+Wire the construct into the full VB-Δsid background carrying V-01 and V-03
+constructs (full metabolic strain). Grow anaerobically on mineral substrate
+as per V-03 protocol.
+
+Manipulate electron input rate by varying magnetite concentration (0.1, 0.5,
+1.0, 5.0 mg/mL) — higher mineral concentration = more electrons available =
+higher risk of ETC saturation = more overflow glow.
+
+Measure luminescence in real-time using the plate reader (luminescence mode,
+30°C, no agitation during reads — cells need contact with mineral, see V-03).
+Simultaneously measure Fe²⁺ accumulation (Ferrozine assay, V-03 Step 4) to
+track electron flux.
+
+The overflow threshold is correct when: luminescence only rises AFTER electron
+flux plateaus (ETC saturated). If luminescence rises proportionally to electron
+flux from the beginning, the overflow promoter is too sensitive — P_overflow
+threshold needs to be recalibrated (contact synthesis team for new variant).

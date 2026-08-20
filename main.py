@@ -9,18 +9,28 @@ def main():
 
     project_root = Path(__file__).parent
 
-    game_files = project_root / "game_files"
+    cell_files = project_root / "cell_files"
+    bridge_files = project_root / "bridge_files"
+    battery_files = project_root / "battery_files"
 
-    filesystem = FakeFileSystem(game_files)
+
 
     while True:
-        filesystem.reset()
-
         opening()
 
-        username = login()
+        login_info = login()
 
-        login_success(username)
+        username = login_info[0]
+        password = login_info[1]
+
+        login_success()
+
+        if password.lower() == "cells4l":
+            filesystem = FakeFileSystem(cell_files)
+        elif password.lower() == "bridgesarecool":
+            filesystem = FakeFileSystem(bridge_files)
+        else:
+            filesystem = FakeFileSystem(battery_files)
 
         terminal = Terminal(filesystem)
 
