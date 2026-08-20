@@ -132,7 +132,13 @@ class FakeFileSystem:
             return
 
         print()
+        print("Item Content")
+        print("===============")
+        print()
         print(item["content"].strip())
+        print()
+        print("===============")
+        print("End of Item Content")
         print()
 
     def reset(self):
@@ -195,7 +201,7 @@ class FakeFileSystem:
 
         fake_filename = f"{name_before_lock}.{extension}"
 
-        return fake_filename, True, password
+        return fake_filename, True, password.lower()
 
     def unlock(self, filename, password):
         directory = self.get_current_directory()
