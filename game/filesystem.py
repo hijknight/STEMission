@@ -127,7 +127,7 @@ class FakeFileSystem:
             print()
             print("ACCESS DENIED")
             print("This file is password protected.")
-            print(f"Use: unlock {filename}")
+            print(f"Try: unlock {filename}")
             print()
             return
 
