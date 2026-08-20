@@ -66,7 +66,7 @@ class FakeFileSystem:
         for name, item in directory.items():
 
             if isinstance(item, dict):
-                print(f"[DIR] {name}")
+                print(f"[FOLDER] {name}")
 
             else:
                 print(f"[FILE] {name}")

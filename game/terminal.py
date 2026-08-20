@@ -58,7 +58,7 @@ help              Show available commands
 ls                List files
 pwd               Show current directory
 cd <directory>    Change directory
-view <file>        Read a file
+view <file>       Read a file
 print <file>      Print a specified file (very helpful)
 clear             Clear the terminal
 logout            Log out

@@ -9,7 +9,7 @@ def main():
 
     project_root = Path(__file__).parent
 
-    cell_files = project_root / "cell_files"
+    science_files = project_root / "science_files" # cells4L password
     bridge_files = project_root / "bridge_files"
     battery_files = project_root / "battery_files"
 
@@ -26,7 +26,7 @@ def main():
         login_success()
 
         if password.lower() == "cells4l":
-            filesystem = FakeFileSystem(cell_files)
+            filesystem = FakeFileSystem(science_files)
         elif password.lower() == "bridgesarecool":
             filesystem = FakeFileSystem(bridge_files)
         else:
