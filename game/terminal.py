@@ -124,15 +124,11 @@ logout            Log out
             print("Usage: unlock <filename>")
             return
 
-        password = input("PASSWORD: ").strip()
+        password = (input("PASSWORD: ")
+                    .strip()
+                    .lower())
 
         self.filesystem.unlock(
             argument,
             password
         )
-
-        print()
-        print("File Content:")
-        print()
-
-        self.filesystem.view(argument)
