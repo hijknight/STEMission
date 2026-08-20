@@ -8,6 +8,7 @@ def print_file(file_path):
         print(f"File not found: {file_path}")
         return False
 
+
     try:
         subprocess.run(
             ["lp", str(file_path)],
