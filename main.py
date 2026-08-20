@@ -8,10 +8,11 @@ from game.terminal import Terminal
 def main():
 
     project_root = Path(__file__).parent
+    assets_dir = project_root / "assets"
 
-    science_files = project_root / "science_files" # cell
-    engineering_files = project_root / "engineering_files" # bridge
-    technology_files = project_root / "technology_files" # battery
+    science_files = assets_dir / "science_files" # cell
+    engineering_files = assets_dir / "engineering_files" # bridge
+    technology_files = assets_dir / "technology_files" # battery
 
     while True:
         opening()

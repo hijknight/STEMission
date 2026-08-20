@@ -61,7 +61,6 @@ pwd               Show current directory
 cd <directory>    Change directory
 view <file>       Read a file
 unlock <file>     Unlock a protected file
-print <file>      Print a specified file (very helpful)
 clear             Clear the terminal
 logout            Log out
 """)
@@ -131,3 +130,9 @@ logout            Log out
             argument,
             password
         )
+
+        print()
+        print("File Content:")
+        print()
+
+        self.filesystem.view(argument)
