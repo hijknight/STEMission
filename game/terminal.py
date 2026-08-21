@@ -57,7 +57,6 @@ AVAILABLE COMMANDS
 
 help              Show available commands
 ls                List files
-pwd               Show current directory
 cd <directory>    Change directory
 view <file>       Read a file
 unlock <file>     Unlock a protected file
