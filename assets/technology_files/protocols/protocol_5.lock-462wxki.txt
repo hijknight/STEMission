@@ -1,0 +1,147 @@
+================================================================================
+LABORATORY NOTEBOOK — DR. EVELYN CARTER
+SUBTERRANEAN LABORATORY, SECTOR 7 — "PROJECT V"
+NOTEBOOK VOL. III — PROTOCOLS & OPERATIONAL RECORDS
+CLASSIFICATION: PERSONAL
+================================================================================
+
+PROTOCOL V-05 — AТРSYNTHASE GRADIENT CONFIRMATION AND DIVS CHECKPOINT TUNING
+Target: Proton gradient integrity + DivS-gated fisZ threshold for cell division
+Version: 1.9
+Last revised: cycle 35, day 29
+
+================================================================================
+
+PURPOSE
+-------
+Confirm that the electron transport chain is generating a proton-motive force
+(PMF) across the inner membrane and that ATP synthase is coupling this gradient
+to ATP production. Then tune the DivS checkpoint — the molecular gatekeeper
+that requires both high ATP: ADP and a GROW-state toggle before releasing the
+fisZ division trigger.
+
+NEW REAGENTS
+------------
+DCCD (dicyclohexylcarbodiimide): ATP synthase inhibitor, 200 mM stock in
+  ethanol, working concentration 50 µM. Used to confirm ATP production is
+  gradient-dependent. CAUTION: DCCD is poorly soluble in water — add to
+  medium while stirring; vortex the ethanol stock before using. If you add
+  it without stirring, it precipitates on your cells immediately, and the
+  inhibition is inconsistent.
+CCCP (carbonyl cyanide m-chlorophenylhydrazone): protonophore, 5 mM stock
+  in ethanol, working concentration 20 µM. Used to collapse the PMF as a
+  control. Also affects mitochondria, in case anyone is using this protocol
+  in a eukaryotic system for some reason. You are not; you are using VB-Δsid.
+ATP/ADP Bioluminescence Assay Kit (commercial, e.g. Sigma-Aldrich MAK135 or
+  equivalent). Store at -80°C. Follow kit protocol exactly for calibration —
+  the standard curve must be generated fresh each assay day, not reused from
+  a previous day. The luciferin in the kit degrades. Old standard curves give
+  false-low ATP readings and make your threshold measurements useless.
+fisZ synthetic gene: 1.1 kb, encodes the cell-division ring protein. This gene
+  is placed under DivS checkpoint control — DivS protein (itself constitutively
+  expressed) only allows fisZ transcription when Fe²⁺: Fe³⁺ toggle is in GROW
+  state AND ATP: ADP is above threshold.
+
+PROCEDURE
+---------
+
+Step 1 — Confirm proton gradient formation (Day 1-2)
+
+Grow full metabolic VB-Δsid strain (carrying V-01, V-02, V-03, V-04 constructs)
+anaerobically on mineral substrate, as per V-03.
+
+At OD₆₀₀ 0.5, split into three flasks:
+  Flask A: untreated control
+  Flask B: add CCCP to 20 µM (collapses PMF)
+  Flask C: add DCCD to 50 µM (blocks ATP synthase but preserves PMF)
+
+Incubate for 30 min at 30°C, anaerobically.
+
+Measure ATP and ADP in all three flasks using the bioluminescence kit.
+Sample 50 µL per time point, quench immediately in 50 µL of the kit's lysis
+reagent (pre-warmed to 30°C — the reagent must be warm; cold lysis reagent
+slows the reaction and underestimates ATP). Run assay per kit protocol.
+
+Expected:
+  Flask A: ATP:ADP ratio 4-8 (healthy, energy-replete cells)
+  Flask B: ATP:ADP drops to <0.5 within 15 min (no gradient, no ATP synthesis)
+  Flask C: ATP:ADP rises transiently then crashes (PMF intact, ATP synthase
+    blocked, cells burn through ATP reserves without replenishing them)
+
+This confirms the cells ARE making ATP via the proton gradient. If Flask B
+shows no change: either CCCP is inactive (check ethanol stock age, CCCP
+degrades over months) or the cells have another ATP source you haven't
+accounted for. Check for substrate-level phosphorylation in the carbon source
+— M9 + glucose can sustain glycolysis independent of the ETC.
+
+Step 2 — Clone DivS checkpoint construct (Day 1-4, parallel)
+
+DivS acts as a two-input AND gate:
+  Input 1: Toggle in GROW state (divR protein produced, which releases
+    DivS from an autoinhibited complex — exact mechanism in V-05-mech-notes)
+  Input 2: ATP:ADP above threshold (DivS has an internal ATP-binding domain
+    that holds it inactive at low ATP — when ATP is abundant, the domain
+    changes conformation and releases the fisZ promoter)
+
+Clone DivS and fisZ:
+  P_const-W — divS (constitutive, always expressed)
+  DivS-binding element — P_fisZ — fisZ
+
+The DivS-binding element upstream of P_fisZ is the tunable part. We have three
+variants corresponding to different ATP binding affinities:
+  DivS-BE-Lo: low ATP threshold (Kd ~0.5 mM ATP) — fast division, low security
+  DivS-BE-Mid: medium threshold (Kd ~2 mM ATP) — balanced (wild-type default)
+  DivS-BE-Hi: high threshold (Kd ~8 mM ATP) — slow division, high energy reserve
+
+ATP concentrations in bacteria typically range 1-10 mM in healthy cells.
+DivS-BE-Mid (Kd 2 mM) means: cells need to be roughly at 50% max energetic
+capacity before being allowed to divide — reasonable, sensible, middle of
+the spectrum. Matches r/K ecological middle ground.
+
+Proceed with cloning as per V-01 workflow. Use pBBR1-origin vector (third
+distinct origin if carrying V-01 and V-02 constructs). Verify by sequencing.
+
+Step 3 — Validate DivS threshold tuning (Day 5-10)
+
+Transform DivS-BE-Mid construct into full metabolic strain.
+Grow anaerobically on mineral slurry, track both ATP: ADP ratio (kit, Step 1)
+and division rate (OD₆₀₀ doubling time AND microscopy — the VB cells are
+rod-shaped, 2-3 µm, division creates symmetric daughter pairs, count them).
+
+Manipulate ATP availability by varying electron flux (mineral concentration,
+as in V-04 Step 4). Low mineral = low electron flux = low ATP = DivS stuck =
+no fisZ = no division. High mineral = high electron flux = high ATP = DivS
+released = fisZ expressed = division proceeds.
+
+The ATP: ADP threshold for division onset should match the DivS-BE binding Kd.
+If division starts at much lower ATP than predicted: DivS is leaking (check
+construct — there may be a secondary promoter upstream of fisZ in your vector
+backbone that bypasses the checkpoint entirely. This happened to me in version
+1.3 and I didn't catch it for three experiments. Map your vector carefully.)
+
+If division never starts despite high ATP: DivS may not be sensing the toggle
+correctly. Toggle confirmation first (V-02, Step 6), then come back to this.
+Do not optimize the checkpoint before confirming the toggle is working.
+The temptation to skip ahead is strong. Resist it.
+
+FINAL NOTE
+----------
+When all five protocols are integrated and confirmed:
+  V-01: scavenger operon expressed, iron uptake active
+  V-02: bistable toggle wired and validated with hysteresis
+  V-03: VolW conduit harvesting electrons from mineral substrate
+  V-04: luciferase overflow valve calibrated to ETC saturation threshold
+  V-05: DivS checkpoint confirmed, fisZ-driven division gated correctly
+
+================================================================================
+END OF NOTEBOOK VOL. III
+PROTOCOLS V-01 THROUGH V-05
+DR. EVELYN CARTER / SECTOR 7 SUBTERRANEAN LABORATORY
+================================================================================
+
+
+
+
+I promise I didn't want anything bad to happen. No one was supposed to die.
+
+Reference number 9843
