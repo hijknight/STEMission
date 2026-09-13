@@ -1,5 +1,10 @@
 # Instructions
 
+
+## ⚠️ Accompanies physical release of product ⚠️
+
+Sole Developer: Harrison Knight
+
 ## Structure of Kit
 
 In each kit, there are three possible paths. The game starts with a case summary, and then presents a riddle to the user.
